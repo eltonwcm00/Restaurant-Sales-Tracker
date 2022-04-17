@@ -1,5 +1,3 @@
-// Your First Program
-
 package salestracker;
 
 class Main {
