@@ -87,7 +87,7 @@ public class GUI extends JFrame {
         }
 
         // Drink
-        for(int i=0; i< foodDesc.length; i++){
+        for(int i=0; i< drinkDesc.length; i++){
 
             drinkName[i] = new JLabel(drinkDesc[i]);
             drinkImgDisplay[i] = new JLabel(drinkImg[i]);
@@ -147,10 +147,11 @@ public class GUI extends JFrame {
         centerRightPanel.add(cartContainer);
 
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setSize(990,800);
+        this.setSize(990,700);
         this.setVisible(true);
         //this.setLayout(null);
         this.setResizable(false);
+        //this.pack();
         this.setBackground(new Color(255,255,255));
     }
 
