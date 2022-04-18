@@ -7,16 +7,40 @@ import javax.swing.event.*;
 
 public class GUI extends JFrame {
 
+    // GUI layout backbone
+    JPanel welcomePanel = new JPanel();
+    JPanel centerLeftPanel = new JPanel();
+    JPanel centerCenterPanel = new JPanel();
+    JPanel centerRightPanel = new JPanel();
+    JPanel bottomPanel = new JPanel();
+
+    //Welcome panel
+    JLabel welcomeText = new JLabel("Welcome to Elton Restaurant");
+
+    // Item list
+    JPanel itemContainer = new JPanel();
+
+    // Item Selection
+    JPanel foodCheckBoxContainer = new JPanel();
+    JCheckBox nasiLemakCheck = new JCheckBox();
+    JCheckBox miGorengCheck = new JCheckBox();
+    JCheckBox rotiCheck = new JCheckBox();
+    JCheckBox sirupCheck = new JCheckBox();
+    JCheckBox tehCheck = new JCheckBox();
+    JCheckBox miloCheck = new JCheckBox();
+
+    // Checkout and Discount code panel
+    JButton checkoutBtn = new JButton("Proceed to Checkout");
+    JLabel discountText = new JLabel("Please enter the coupon code (*if applicable):");
+    JTextField discountInput = new JTextField(5);
+
+    // Cart panel
+    JPanel cartContainer = new JPanel();
+    JLabel cartHeader = new JLabel("<html><u>Cart</u></html>");
+
     GUI() {
 
         super("Restaurant Sales Performance Tracker");
-
-        // GUI layout backbone
-        JPanel welcomePanel = new JPanel();
-        JPanel centerLeftPanel = new JPanel();
-        JPanel centerCenterPanel = new JPanel();
-        JPanel centerRightPanel = new JPanel();
-        JPanel bottomPanel = new JPanel();
 
         welcomePanel.setBackground(Color.red);
         centerLeftPanel.setBackground(Color.blue);
@@ -33,12 +57,7 @@ public class GUI extends JFrame {
         centerRightPanel.setPreferredSize(new Dimension(500, 300));
         this.add(centerCenterPanel, BorderLayout.CENTER);
 
-        //Welcome panel
-        JLabel welcomeText = new JLabel("Welcome to Elton Restaurant");
         welcomePanel.add(welcomeText);
-
-        // Item list
-        JPanel itemContainer = new JPanel();
 
         itemContainer.setLayout(new BoxLayout(itemContainer, BoxLayout.Y_AXIS));
         itemContainer.setBorder(BorderFactory.createEmptyBorder(0, 30, 0,100));
@@ -91,15 +110,8 @@ public class GUI extends JFrame {
         }
 
         // Item Selection
-        JPanel foodCheckBoxContainer = new JPanel();
-        foodCheckBoxContainer.setLayout(new BoxLayout(foodCheckBoxContainer, BoxLayout.Y_AXIS));
 
-        JCheckBox nasiLemakCheck = new JCheckBox();
-        JCheckBox miGorengCheck = new JCheckBox();
-        JCheckBox rotiCheck = new JCheckBox();
-        JCheckBox sirupCheck = new JCheckBox();
-        JCheckBox tehCheck = new JCheckBox();
-        JCheckBox miloCheck = new JCheckBox();
+        foodCheckBoxContainer.setLayout(new BoxLayout(foodCheckBoxContainer, BoxLayout.Y_AXIS));
 
         foodCheckBoxContainer.add(nasiLemakCheck);
         foodCheckBoxContainer .add(Box.createRigidArea(new Dimension(0,90)));
@@ -116,9 +128,6 @@ public class GUI extends JFrame {
         centerCenterPanel.add(foodCheckBoxContainer);
 
         // Checkout and Discount code panel
-        JButton checkoutBtn = new JButton("Proceed to Checkout");
-        JLabel discountText = new JLabel("Please enter the coupon code (*if applicable):");
-        JTextField discountInput = new JTextField(5);
         discountInput.setBorder(BorderFactory.createEmptyBorder(0, 0, 0,100));
 
         bottomPanel.add(discountText);
@@ -126,23 +135,17 @@ public class GUI extends JFrame {
         bottomPanel.add(checkoutBtn);
 
         // Cart panel
-        JPanel cartContainer = new JPanel();
-        JLabel cartHeader = new JLabel("<html><u>Cart</u></html>");
         cartHeader.setFont(new Font("Times New Roman", Font.BOLD, 20));
 
         cartContainer.add(cartHeader);
         centerRightPanel.add(cartContainer);
 
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setSize(990,700);
+        this.setSize(990,800);
         this.setVisible(true);
         //this.setLayout(null);
         this.setResizable(false);
         //this.pack();
         this.setBackground(new Color(255,255,255));
-    }
-
-    void print() {
-        System.out.println("2nd Class");
     }
 }

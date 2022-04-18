@@ -2,7 +2,7 @@ package salestracker;
 
 import javax.swing.*;
 
-public class ItemBuilder implements ItemImplement {
+public class ItemBuilder implements ItemPlan {
 
         ImageIcon[] foodImg = {
             new ImageIcon(getClass().getResource("../foodImg/nasi_lemak.png")),
@@ -16,8 +16,8 @@ public class ItemBuilder implements ItemImplement {
         };
         String[] foodName = new String[] {"Spicy Nasi Lemak", "Kampung Mi Goreng", "Roti Canai"};
         Double[] foodPrice = new Double[] {5.50, 3.30, 4.50, 9.0};
-        String[] drinkName = new String[] {"Sirup Bandung", "Teh Aissie", "Kopi Cham"};
-        Double[] drinkPrice= new Double[] {5.20, 2.20, 1.20};
+        String[] drinkName = new String[] {"Sirup Bandung", "Teh Ais", "Kopi Cham"};
+        Double[] drinkPrice= new Double[] {5.20, 2.10, 1.90};
 
         public ItemBuilder foodImg (ImageIcon[] foodImgArr) {
             this.foodImg = foodImgArr;
