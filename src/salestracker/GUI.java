@@ -11,7 +11,7 @@ public class GUI extends JFrame {
     JPanel centerLeftPanel = new JPanel();
     JPanel centerCenterPanel = new JPanel();
     JPanel centerRightPanel = new JPanel(new BorderLayout());
-    JPanel bottomPanel = new JPanel();
+    JPanel bottomPanel = new JPanel(new BorderLayout());
 
     //Welcome panel
     JLabel welcomeText = new JLabel("Welcome to Elton Restaurant");
@@ -29,16 +29,18 @@ public class GUI extends JFrame {
     JCheckBox miloCheck = new JCheckBox();
 
     // Checkout and Discount code panel
-    JButton checkoutBtn = new JButton("Proceed to Checkout");
+    JPanel bottomLeftPanel = new JPanel();
+    JPanel bottomRightPanel = new JPanel();
+    JButton applyBtn = new JButton("Apply");
     JLabel discountText = new JLabel("Please enter the coupon code (*if applicable):");
     JTextField discountInput = new JTextField(5);
+    JButton checkoutBtn = new JButton("Checkout");
 
     // Cart panel
-    JPanel cartMainContainer = new JPanel();
     JPanel cartItemContainer = new JPanel();
     JPanel cartHeaderContainer = new JPanel();
     JPanel cartPriceContainer = new JPanel();
-    JLabel cartHeader = new JLabel("<html><u>Cart</u></html>");
+    JLabel cartHeader = new JLabel("<html><u>Cart Log</u></html>");
     JLabel cartPrice = new JLabel();
 
     Double sum = 0.0, priceUnit = 0.0;
@@ -51,7 +53,7 @@ public class GUI extends JFrame {
         welcomePanel.setBackground(Color.red);
         centerLeftPanel.setBackground(Color.blue);
         centerRightPanel.setBackground(Color.green);
-        bottomPanel.setBackground(Color.yellow);
+        bottomPanel.setBackground(Color.PINK);
         centerCenterPanel.setBackground(Color.ORANGE);
 
         this.add(welcomePanel,BorderLayout.PAGE_START);
@@ -129,10 +131,19 @@ public class GUI extends JFrame {
         centerCenterPanel.add(foodCheckBoxContainer);
 
         // Checkout and Discount code panel
+
+        bottomLeftPanel.setBackground(Color.PINK);
+        bottomRightPanel.setBackground(Color.PINK);
+
+        bottomLeftPanel.add(discountText);
+        bottomLeftPanel.add(discountInput);
+        bottomLeftPanel.add(applyBtn);
+        bottomRightPanel.add(checkoutBtn);
+
         discountInput.setBorder(BorderFactory.createEmptyBorder(0, 0, 0,100));
-        bottomPanel.add(discountText);
-        bottomPanel.add(discountInput);
-        bottomPanel.add(checkoutBtn);
+
+        bottomPanel.add(bottomLeftPanel, BorderLayout.WEST);
+        bottomPanel.add(bottomRightPanel, BorderLayout.EAST);
 
         // Cart panel
         centerRightPanel.add(cartHeaderContainer, BorderLayout.NORTH);
@@ -190,33 +201,43 @@ public class GUI extends JFrame {
                 itemPriceJLabel.setText("RM " + priceUnit);
 
             } else {
+
                 if (cbGroup == nasiLemakCheck) {
                     sum -= itemObRead.getFoodPrice()[0];
-                    itemLabel = " ";
+                    itemLabel = "<html><s>" + itemObRead.getFoodName()[0] + " RM " + itemObRead.getFoodPrice()[0] + "</s></html>";
                 } else if (cbGroup == miGorengCheck) {
                     sum -= itemObRead.getFoodPrice()[1];
+                    itemLabel = "<html><s>" + itemObRead.getFoodName()[1] + " RM " + itemObRead.getFoodPrice()[1] + "</s></html>";
                 } else if (cbGroup == rotiCheck) {
                     sum -= itemObRead.getFoodPrice()[2];
+                    itemLabel = "<html><s>" + itemObRead.getFoodName()[2] + " RM " + itemObRead.getFoodPrice()[2] + "</s></html>";
                 } else if (cbGroup == sirupCheck) {
                     sum -= itemObRead.getDrinkPrice()[0];
+                    itemLabel = "<html><s>" + itemObRead.getDrinkName()[0] + " RM " + itemObRead.getDrinkPrice()[0] + "</s></html>";
                 } else if (cbGroup == tehCheck) {
                     sum -= itemObRead.getDrinkPrice()[1];
+                    itemLabel = "<html><s>" + itemObRead.getDrinkName()[1] + " RM " + itemObRead.getDrinkPrice()[1] + "</s></html>";
                 } else if (cbGroup == miloCheck) {
                     sum -= itemObRead.getDrinkPrice()[2];
+                    itemLabel = "<html><s>" + itemObRead.getDrinkName()[2] + " RM " + itemObRead.getDrinkPrice()[2] + "</s></html>";
                 }
+
+                itemNameJLabel.setText(itemLabel);
             }
 
-            cartPrice.setText(String.format("Total Price : RM %.2f",sum));
+            JPanel cartItemListContainer = new JPanel();
+            //cartItemListContainer.setLayout(new BoxLayout(cartItemListContainer, BoxLayout.Y_AXIS));
+            cartItemContainer.setLayout(new BoxLayout(cartItemContainer, BoxLayout.Y_AXIS));
+            cartItemListContainer.add(itemNameJLabel);
+            cartItemListContainer.add(itemPriceJLabel);
 
-           // JPanel cartItemListContainer = new JPanel();
-            //cartItemListContainer.setLayout(new BoxLayout(itemContainer, BoxLayout.Y_AXIS));
+            cartItemContainer.add(cartItemListContainer);
             centerRightPanel.add(cartItemContainer, BorderLayout.CENTER);
-            cartItemContainer.setBackground(Color.MAGENTA);
+            cartItemListContainer.setBackground(Color.MAGENTA);
 
-            cartItemContainer.add(itemNameJLabel);
-            cartItemContainer.add(itemPriceJLabel);
+            cartItemListContainer.revalidate();
 
-            cartItemContainer.revalidate();
+            cartPrice.setText(String.format("Total Price : RM %.2f",sum));
 
             centerRightPanel.add(cartPriceContainer, BorderLayout.SOUTH);
             cartPriceContainer.setBackground(Color.CYAN);
