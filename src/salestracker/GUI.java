@@ -3,7 +3,6 @@ package salestracker;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.event.*;
 
 public class GUI extends JFrame {
 
@@ -11,7 +10,7 @@ public class GUI extends JFrame {
     JPanel welcomePanel = new JPanel();
     JPanel centerLeftPanel = new JPanel();
     JPanel centerCenterPanel = new JPanel();
-    JPanel centerRightPanel = new JPanel();
+    JPanel centerRightPanel = new JPanel(new BorderLayout());
     JPanel bottomPanel = new JPanel();
 
     //Welcome panel
@@ -35,8 +34,15 @@ public class GUI extends JFrame {
     JTextField discountInput = new JTextField(5);
 
     // Cart panel
-    JPanel cartContainer = new JPanel();
+    JPanel cartMainContainer = new JPanel();
+    JPanel cartItemContainer = new JPanel();
+    JPanel cartHeaderContainer = new JPanel();
+    JPanel cartPriceContainer = new JPanel();
     JLabel cartHeader = new JLabel("<html><u>Cart</u></html>");
+    JLabel cartPrice = new JLabel();
+
+    Double sum = 0.0, priceUnit = 0.0;
+    String itemLabel;
 
     GUI() {
 
@@ -55,6 +61,7 @@ public class GUI extends JFrame {
         this.add(bottomPanel, BorderLayout.PAGE_END);
 
         centerRightPanel.setPreferredSize(new Dimension(500, 300));
+
         this.add(centerCenterPanel, BorderLayout.CENTER);
 
         welcomePanel.add(welcomeText);
@@ -110,42 +117,111 @@ public class GUI extends JFrame {
         }
 
         // Item Selection
-
         foodCheckBoxContainer.setLayout(new BoxLayout(foodCheckBoxContainer, BoxLayout.Y_AXIS));
 
-        foodCheckBoxContainer.add(nasiLemakCheck);
-        foodCheckBoxContainer .add(Box.createRigidArea(new Dimension(0,90)));
-        foodCheckBoxContainer.add(miGorengCheck);
-        foodCheckBoxContainer .add(Box.createRigidArea(new Dimension(0,100)));
-        foodCheckBoxContainer.add(rotiCheck);
-        foodCheckBoxContainer.add(Box.createRigidArea(new Dimension(0,100)));
-        foodCheckBoxContainer.add(sirupCheck);
-        foodCheckBoxContainer .add(Box.createRigidArea(new Dimension(0,100)));
-        foodCheckBoxContainer.add(tehCheck);
-        foodCheckBoxContainer .add(Box.createRigidArea(new Dimension(0,100)));
+        foodCheckBoxContainer.add(nasiLemakCheck); foodCheckBoxContainer.add(Box.createRigidArea(new Dimension(0,90)));
+        foodCheckBoxContainer.add(miGorengCheck); foodCheckBoxContainer.add(Box.createRigidArea(new Dimension(0,100)));
+        foodCheckBoxContainer.add(rotiCheck); foodCheckBoxContainer.add(Box.createRigidArea(new Dimension(0,100)));
+        foodCheckBoxContainer.add(sirupCheck); foodCheckBoxContainer.add(Box.createRigidArea(new Dimension(0,100)));
+        foodCheckBoxContainer.add(tehCheck);foodCheckBoxContainer.add(Box.createRigidArea(new Dimension(0,100)));
         foodCheckBoxContainer.add(miloCheck);
 
         centerCenterPanel.add(foodCheckBoxContainer);
 
         // Checkout and Discount code panel
         discountInput.setBorder(BorderFactory.createEmptyBorder(0, 0, 0,100));
-
         bottomPanel.add(discountText);
         bottomPanel.add(discountInput);
         bottomPanel.add(checkoutBtn);
 
         // Cart panel
+        centerRightPanel.add(cartHeaderContainer, BorderLayout.NORTH);
+        cartHeaderContainer.setBackground(Color.yellow);
         cartHeader.setFont(new Font("Times New Roman", Font.BOLD, 20));
+        cartHeaderContainer.add(cartHeader);
 
-        cartContainer.add(cartHeader);
-        centerRightPanel.add(cartContainer);
+        /* =======================================================================Logic Handler======================================================================= */
 
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setSize(990,800);
-        this.setVisible(true);
-        //this.setLayout(null);
-        this.setResizable(false);
-        //this.pack();
-        this.setBackground(new Color(255,255,255));
+        GUIBackend gB = new GUIBackend();
+
+        nasiLemakCheck.addActionListener(gB); miGorengCheck.addActionListener(gB);rotiCheck.addActionListener(gB);
+        sirupCheck.addActionListener(gB); tehCheck.addActionListener(gB); miloCheck.addActionListener(gB);
+    }
+
+    class GUIBackend implements ActionListener {
+
+        public void actionPerformed(ActionEvent event) {
+
+            JCheckBox cbGroup = (JCheckBox) event.getSource();
+            JLabel itemNameJLabel = new JLabel();
+            JLabel itemPriceJLabel = new JLabel();
+
+            Item itemObRead = new ItemBuilder().buildItem();
+
+            if (cbGroup.isSelected()) {
+
+                if (cbGroup == nasiLemakCheck) {
+                    sum += itemObRead.getFoodPrice()[0];
+                    priceUnit = itemObRead.getFoodPrice()[0];
+                    itemLabel = itemObRead.getFoodName()[0];
+                } else if (cbGroup == miGorengCheck) {
+                    sum += itemObRead.getFoodPrice()[1];
+                    priceUnit = itemObRead.getFoodPrice()[1];
+                    itemLabel = itemObRead.getFoodName()[1];
+                } else if (cbGroup == rotiCheck) {
+                    sum += itemObRead.getFoodPrice()[2];
+                    priceUnit = itemObRead.getFoodPrice()[2];
+                    itemLabel = itemObRead.getFoodName()[2];
+                } else if (cbGroup == sirupCheck) {
+                    sum += itemObRead.getDrinkPrice()[0];
+                    priceUnit = itemObRead.getDrinkPrice()[0];
+                    itemLabel = itemObRead.getDrinkName()[0];
+                } else if (cbGroup == tehCheck) {
+                    sum += itemObRead.getDrinkPrice()[1];
+                    priceUnit = itemObRead.getDrinkPrice()[1];
+                    itemLabel = itemObRead.getDrinkName()[1];
+                } else if (cbGroup == miloCheck) {
+                    sum += itemObRead.getDrinkPrice()[2];
+                    priceUnit = itemObRead.getDrinkPrice()[2];
+                    itemLabel = itemObRead.getDrinkName()[2];
+                }
+
+                itemNameJLabel.setText(itemLabel);
+                itemPriceJLabel.setText("RM " + priceUnit);
+
+            } else {
+                if (cbGroup == nasiLemakCheck) {
+                    sum -= itemObRead.getFoodPrice()[0];
+                    itemLabel = " ";
+                } else if (cbGroup == miGorengCheck) {
+                    sum -= itemObRead.getFoodPrice()[1];
+                } else if (cbGroup == rotiCheck) {
+                    sum -= itemObRead.getFoodPrice()[2];
+                } else if (cbGroup == sirupCheck) {
+                    sum -= itemObRead.getDrinkPrice()[0];
+                } else if (cbGroup == tehCheck) {
+                    sum -= itemObRead.getDrinkPrice()[1];
+                } else if (cbGroup == miloCheck) {
+                    sum -= itemObRead.getDrinkPrice()[2];
+                }
+            }
+
+            cartPrice.setText(String.format("Total Price : RM %.2f",sum));
+
+           // JPanel cartItemListContainer = new JPanel();
+            //cartItemListContainer.setLayout(new BoxLayout(itemContainer, BoxLayout.Y_AXIS));
+            centerRightPanel.add(cartItemContainer, BorderLayout.CENTER);
+            cartItemContainer.setBackground(Color.MAGENTA);
+
+            cartItemContainer.add(itemNameJLabel);
+            cartItemContainer.add(itemPriceJLabel);
+
+            cartItemContainer.revalidate();
+
+            centerRightPanel.add(cartPriceContainer, BorderLayout.SOUTH);
+            cartPriceContainer.setBackground(Color.CYAN);
+            cartPriceContainer.add(cartPrice);
+        }
     }
 }
+
