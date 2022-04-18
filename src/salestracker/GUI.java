@@ -43,38 +43,25 @@ public class GUI extends JFrame {
         itemContainer.setLayout(new BoxLayout(itemContainer, BoxLayout.Y_AXIS));
         itemContainer.setBorder(BorderFactory.createEmptyBorder(0, 30, 0,100));
 
-        String[] foodDesc = new String[] {"Spicy Nasi Lemak", "Kampung Mi Goreng", "Roti Canai"};
-        Integer[] foodPrice = new Integer[] {30, 20, 80};
+        Item itemObRead = new ItemBuilder().buildItem();
 
-        ImageIcon[] foodImg = {
-                new ImageIcon(getClass().getResource("../foodImg/nasi_lemak.png")),
-                new ImageIcon(getClass().getResource("../foodImg/mi_goreng.png")),
-                new ImageIcon(getClass().getResource("../foodImg/roti_canai.png")),
-        };
+        new ItemBuilder().foodImg(itemObRead.getFoodImg()).foodName(itemObRead.getFoodName()).foodPrice(itemObRead.getFoodPrice()).buildItem();
+        new ItemBuilder().drinkImg(itemObRead.getDrinkImg()).drinkName(itemObRead.getDrinkName()).drinkPrice(itemObRead.getDrinkPrice()).buildItem();
 
-        JLabel[] foodName = new JLabel[foodDesc.length];
-        JLabel[] foodPricing = new JLabel[foodPrice.length];
-        JLabel[] foodImgDisplay = new JLabel[foodImg.length];
+        JLabel[] foodName = new JLabel[itemObRead.getFoodName().length];
+        JLabel[] foodPricing = new JLabel[itemObRead.getFoodPrice().length];
+        JLabel[] foodImgDisplay = new JLabel[itemObRead.getFoodImg().length];
 
-        String[] drinkDesc = new String[] {"Sirup Bandung", "Teh Ais", "Kopi Cham"};
-        Integer[] drinkPrice = new Integer[] {5, 3, 2};
-
-        ImageIcon[] drinkImg= {
-                new ImageIcon(getClass().getResource("../drinkImg/sirup.png")),
-                new ImageIcon(getClass().getResource("../drinkImg/teh-ais.png")),
-                new ImageIcon(getClass().getResource("../drinkImg/milo-ais.png")),
-        };
-
-        JLabel[] drinkName = new JLabel[drinkDesc.length];
-        JLabel[] drinkPricing = new JLabel[drinkPrice.length];
-        JLabel[] drinkImgDisplay = new JLabel[drinkImg.length];
+        JLabel[] drinkName = new JLabel[itemObRead.getDrinkName().length];
+        JLabel[] drinkPricing = new JLabel[itemObRead.getDrinkPrice().length];
+        JLabel[] drinkImgDisplay = new JLabel[itemObRead.getDrinkImg().length];
 
         // Food
-        for(int i=0; i< foodDesc.length; i++){
+        for(int i=0; i<itemObRead.getFoodName().length; i++){
 
-            foodName[i] = new JLabel(foodDesc[i]);
-            foodImgDisplay[i] = new JLabel(foodImg[i]);
-            foodPricing[i] = new JLabel("RM " + foodPrice[i]); //String.valueOf()
+            foodName[i] = new JLabel(itemObRead.getFoodName()[i]);
+            foodImgDisplay[i] = new JLabel(itemObRead.getFoodImg()[i]);
+            foodPricing[i] = new JLabel("RM " + itemObRead.getFoodPrice()[i]); //String.valueOf()
 
             foodName[i].setFont(new Font("Times New Roman", Font.BOLD, 15));
             foodName[i].setPreferredSize(new Dimension(250, 100));
@@ -87,11 +74,11 @@ public class GUI extends JFrame {
         }
 
         // Drink
-        for(int i=0; i< drinkDesc.length; i++){
+        for(int i=0; i<itemObRead.getDrinkName().length; i++){
 
-            drinkName[i] = new JLabel(drinkDesc[i]);
-            drinkImgDisplay[i] = new JLabel(drinkImg[i]);
-            drinkPricing[i] = new JLabel("RM " + drinkPrice[i]); //String.valueOf()
+            drinkName[i] = new JLabel(itemObRead.getDrinkName()[i]);
+            drinkImgDisplay[i] = new JLabel(itemObRead.getDrinkImg()[i]);
+            drinkPricing[i] = new JLabel("RM " + itemObRead.getDrinkPrice()[i]); //String.valueOf()
 
             drinkName[i].setFont(new Font("Times New Roman", Font.BOLD, 15));
             drinkName[i].setPreferredSize(new Dimension(250, 100));
