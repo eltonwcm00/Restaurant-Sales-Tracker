@@ -9,7 +9,7 @@ public interface ItemPlan {
     public ItemPlan drinkImg (ImageIcon[] drinkImgArr);
     public ItemPlan drinkName (String[] drinkNameArr);
     public ItemPlan drinkPrice (Double[] drinkPriceArr);
-    public ItemPlan discountAmount (String[] discountAmountArr);
+    public ItemPlan discountAmount (Double[] discountAmountArr);
     public ItemPlan discountType (String[] discountTypeArr);
     public Item buildItem();
 }

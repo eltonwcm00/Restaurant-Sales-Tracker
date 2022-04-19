@@ -18,7 +18,7 @@ public class ItemBuilder implements ItemPlan {
         Double[] foodPrice = new Double[] {5.50, 3.30, 4.70, 9.0};
         String[] drinkName = new String[] {"Sirup Bandung", "Teh Ais", "Kopi Cham"};
         Double[] drinkPrice= new Double[] {5.20, 2.10, 1.90};
-        String[] discountAmt = new String[] {"10%", "20%"};
+        Double[] discountAmt = new Double[] {0.1, 0.2};
         String[] discountType =  new String[] {"Food & Drink", "Food", "Drink"};
 
         public ItemBuilder foodImg (ImageIcon[] foodImgArr) {
@@ -51,7 +51,7 @@ public class ItemBuilder implements ItemPlan {
             return this;
         }
 
-        public ItemBuilder discountAmount (String[] discountAmountArr) {
+        public ItemBuilder discountAmount (Double[] discountAmountArr) {
             this.discountAmt = discountAmountArr;
             return this;
         }

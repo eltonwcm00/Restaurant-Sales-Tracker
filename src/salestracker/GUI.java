@@ -29,6 +29,7 @@ public class GUI extends JFrame {
     JCheckBox miloCheck = new JCheckBox();
 
     // Checkout and Discount code panel
+
     JPanel bottomLeftPanel = new JPanel();
     JPanel bottomRightPanel = new JPanel();
     JButton applyBtn = new JButton("Apply");
@@ -36,8 +37,8 @@ public class GUI extends JFrame {
     JLabel discountAmountText =  new JLabel("Discount Amount:");
     JLabel discountCodeText = new JLabel("Coupon code:");
     ButtonGroup discountGroup = new ButtonGroup();
-    JRadioButton discount20;
-    JRadioButton discount10;
+    JRadioButton discount20Disp;
+    JRadioButton discount10Disp;
     JComboBox discountSelection;
     JTextField discountInput = new JTextField(1);
     JButton checkoutBtn = new JButton("Checkout");
@@ -49,9 +50,16 @@ public class GUI extends JFrame {
     JLabel cartHeader = new JLabel("<html><u>Cart Log</u></html>");
     JLabel cartPrice = new JLabel();
 
-    Double sum = 0.0, priceUnit = 0.0;
+    Double sum = 0.0, priceUnit = 0.0, discountAmount = 0.0;
     String itemLabel;
-    String[] discountType, discountAmount;
+    String[] discountType;
+    Boolean discountTypeValid = false, discountAmtValid = false,
+            discount10 = false, discount20 = false;
+
+    // Receipt
+    JLabel discount10JDisp = new JLabel(" ");
+    JLabel discount20JDisp = new JLabel(" ");
+    JLabel discountAfterPrice = new JLabel(" ");
 
     GUI() {
 
@@ -155,27 +163,35 @@ public class GUI extends JFrame {
         bottomLeftPanel.add(discountTypeText);
         discountType = itemObRead.getDiscountType();
         discountSelection = new JComboBox(discountType);
+        discountSelection.setSelectedIndex(-1);
+
         bottomLeftPanel.add(discountSelection);
         bottomLeftPanel.add(discountAmountText);
 
-        discount10 = new JRadioButton(String.valueOf(itemObRead.getDiscountAmt()[0]));
-        discount20 = new JRadioButton(String.valueOf(itemObRead.getDiscountAmt()[1]));
-        discountGroup.add(discount10); discountGroup.add(discount20);
+//        discount10 = itemObRead.getDiscountAmt()[0];
+//        discount20 = itemObRead.getDiscountAmt()[1];
+        discount10Disp = new JRadioButton("10%");
+        discount20Disp = new JRadioButton("20%");
+        discountGroup.add(discount10Disp); discountGroup.add(discount20Disp);
+        discount10Disp.setEnabled(false); discount20Disp.setEnabled(false);
 
-        discount10.setOpaque(true);
-        discount10.setBackground(Color.PINK);
-        discount20.setOpaque(true);
-        discount20.setBackground(Color.PINK);
+        discount10Disp.setOpaque(true);
+        discount10Disp.setBackground(Color.PINK);
+        discount20Disp.setOpaque(true);
+        discount20Disp.setBackground(Color.PINK);
 
-        bottomLeftPanel.add(discount10);
-        bottomLeftPanel.add(discount20);
+        bottomLeftPanel.add(discount10Disp);
+        bottomLeftPanel.add(discount20Disp);
 
         bottomLeftPanel.add(discountCodeText);
         bottomLeftPanel.add(discountInput);
+        discountInput.setEditable(false);
 
         bottomLeftPanel.add(applyBtn);
 
         bottomRightPanel.add(checkoutBtn);
+        bottomRightPanel.add(discount10JDisp);
+        bottomRightPanel.add(discount20JDisp);
 
         discountInput.setBorder(BorderFactory.createEmptyBorder(0, 0, 0,100));
 
