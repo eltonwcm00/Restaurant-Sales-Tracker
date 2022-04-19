@@ -9,5 +9,6 @@ public interface ItemPlan {
     public ItemPlan drinkImg (ImageIcon[] drinkImgArr);
     public ItemPlan drinkName (String[] drinkNameArr);
     public ItemPlan drinkPrice (Double[] drinkPriceArr);
+//    public ItemPlan discountAmount (Integer[] discountAmountArr);
     public Item buildItem();
 }

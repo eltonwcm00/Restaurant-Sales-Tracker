@@ -131,7 +131,6 @@ public class GUI extends JFrame {
         centerCenterPanel.add(foodCheckBoxContainer);
 
         // Checkout and Discount code panel
-
         bottomLeftPanel.setBackground(Color.PINK);
         bottomRightPanel.setBackground(Color.PINK);
 
@@ -226,13 +225,14 @@ public class GUI extends JFrame {
             }
 
             JPanel cartItemListContainer = new JPanel();
-            //cartItemListContainer.setLayout(new BoxLayout(cartItemListContainer, BoxLayout.Y_AXIS));
             cartItemContainer.setLayout(new BoxLayout(cartItemContainer, BoxLayout.Y_AXIS));
+            centerRightPanel.setBorder(BorderFactory.createEmptyBorder(30, 0, 0, 0));
+            cartItemContainer.setOpaque(true);
             cartItemListContainer.add(itemNameJLabel);
             cartItemListContainer.add(itemPriceJLabel);
 
             cartItemContainer.add(cartItemListContainer);
-            centerRightPanel.add(cartItemContainer, BorderLayout.CENTER);
+            centerRightPanel.add(cartItemContainer, BorderLayout.PAGE_START);
             cartItemListContainer.setBackground(Color.MAGENTA);
 
             cartItemListContainer.revalidate();
