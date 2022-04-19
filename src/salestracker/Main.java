@@ -5,10 +5,9 @@ import java.awt.*;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 class Main {
-
+//
     public static void main(String[] args) {
-
-        GUI gObj = new GUI();
+        GUICheckoutController gObj = new GUICheckoutController();
 
         gObj.setDefaultCloseOperation(EXIT_ON_CLOSE);
         gObj.setSize(990,800);
