@@ -60,9 +60,7 @@ public class Item {
     public String [] getDiscountCode() { return discountCode; }
 
     public String [] getDiscountAmtDesc() { return discountAmtDesc; }
-
-
-
+    
     @Override
     public String toString() {
         return Arrays.toString(foodImg) + Arrays.toString(foodName) + Arrays.toString(foodPrice)

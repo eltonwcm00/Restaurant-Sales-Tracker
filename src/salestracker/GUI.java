@@ -167,8 +167,6 @@ public class GUI extends JFrame {
         bottomLeftPanel.add(discountSelection);
         bottomLeftPanel.add(discountAmountText);
 
-//        discount10 = itemObRead.getDiscountAmt()[0];
-//        discount20 = itemObRead.getDiscountAmt()[1];
         discount10Disp = new JRadioButton("10%");
         discount20Disp = new JRadioButton("20%");
         discountGroup.add(discount10Disp); discountGroup.add(discount20Disp);
@@ -184,13 +182,11 @@ public class GUI extends JFrame {
 
         bottomLeftPanel.add(discountCodeText);
         bottomLeftPanel.add(discountInput);
-        //discountInput.setEditable(false);
+//        discountInput.setEditable(false);
 
         bottomLeftPanel.add(applyBtn);
 
         bottomRightPanel.add(checkoutBtn);
-
-       // discountInput.setBorder(BorderFactory.createEmptyBorder(0, 0, 0,0));
 
         bottomPanel.add(bottomLeftPanel, BorderLayout.WEST);
         bottomPanel.add(bottomRightPanel, BorderLayout.EAST);
@@ -200,13 +196,6 @@ public class GUI extends JFrame {
         cartHeaderContainer.setBackground(Color.yellow);
         cartHeader.setFont(new Font("Times New Roman", Font.BOLD, 20));
         cartHeaderContainer.add(cartHeader);
-    }
-
-    class GUIDiscountController implements ActionListener {
-
-        public void actionPerformed(ActionEvent e) {
-
-        }
     }
 }
 
