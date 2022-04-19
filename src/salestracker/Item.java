@@ -11,6 +11,8 @@ public class Item {
     private final String[] drinkName;
     private final Double[] foodPrice;
     private final Double[] drinkPrice;
+    private final Double[] discountAmt;
+    private final String[] discountType;
 
     public Item(ItemBuilder itemBuilder) {
         this.foodImg = itemBuilder.foodImg;
@@ -19,6 +21,8 @@ public class Item {
         this.drinkImg = itemBuilder.drinkImg;
         this.drinkName = itemBuilder.drinkName;
         this.drinkPrice = itemBuilder.drinkPrice;
+        this.discountAmt = itemBuilder.discountAmt;
+        this.discountType = itemBuilder.discountType;
     }
 
     public ImageIcon[] getFoodImg() {
@@ -45,8 +49,15 @@ public class Item {
         return drinkPrice;
     }
 
+    public Double[] getDiscountAmt() { return discountAmt; }
+
+    public String [] getDiscountType() { return discountType; }
+
+
     @Override
     public String toString() {
-        return Arrays.toString(foodImg) + Arrays.toString(foodName) + Arrays.toString(foodPrice) + Arrays.toString(drinkImg) + Arrays.toString(drinkName) + Arrays.toString(drinkPrice);
+        return Arrays.toString(foodImg) + Arrays.toString(foodName) + Arrays.toString(foodPrice)
+                + Arrays.toString(drinkImg) + Arrays.toString(drinkName) + Arrays.toString(drinkPrice)
+                + Arrays.toString(discountAmt) + Arrays.toString(discountType);
     }
 }

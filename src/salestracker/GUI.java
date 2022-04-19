@@ -33,6 +33,7 @@ public class GUI extends JFrame {
     JPanel bottomRightPanel = new JPanel();
     JButton applyBtn = new JButton("Apply");
     JLabel discountText = new JLabel("Please enter the coupon code (*if applicable):");
+    JComboBox discountSelection;
     JTextField discountInput = new JTextField(5);
     JButton checkoutBtn = new JButton("Checkout");
 
@@ -136,7 +137,13 @@ public class GUI extends JFrame {
 
         bottomLeftPanel.add(discountText);
         bottomLeftPanel.add(discountInput);
+
+        String s1[] = { "Jalpaiguri", "Mumbai", "Noida", "Kolkata", "New Delhi" };
+        discountSelection = new JComboBox(s1);
+        bottomLeftPanel.add(discountSelection);
+
         bottomLeftPanel.add(applyBtn);
+
         bottomRightPanel.add(checkoutBtn);
 
         discountInput.setBorder(BorderFactory.createEmptyBorder(0, 0, 0,100));
@@ -152,13 +159,13 @@ public class GUI extends JFrame {
 
         /* =======================================================================Logic Handler======================================================================= */
 
-        GUIBackend gB = new GUIBackend();
+        GUICheckoutController gB = new GUICheckoutController();
 
         nasiLemakCheck.addActionListener(gB); miGorengCheck.addActionListener(gB);rotiCheck.addActionListener(gB);
         sirupCheck.addActionListener(gB); tehCheck.addActionListener(gB); miloCheck.addActionListener(gB);
     }
 
-    class GUIBackend implements ActionListener {
+    class GUICheckoutController implements ActionListener {
 
         public void actionPerformed(ActionEvent event) {
 
@@ -244,5 +251,11 @@ public class GUI extends JFrame {
             cartPriceContainer.add(cartPrice);
         }
     }
-}
 
+    class GUIDiscountController implements ActionListener {
+
+        public void actionPerformed(ActionEvent e) {
+
+        }
+    }
+}
