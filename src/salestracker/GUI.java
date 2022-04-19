@@ -129,12 +129,20 @@ public class GUI extends JFrame {
         // Item Selection
         foodCheckBoxContainer.setLayout(new BoxLayout(foodCheckBoxContainer, BoxLayout.Y_AXIS));
 
-        foodCheckBoxContainer.add(nasiLemakCheck); foodCheckBoxContainer.add(Box.createRigidArea(new Dimension(0,90)));
-        foodCheckBoxContainer.add(miGorengCheck); foodCheckBoxContainer.add(Box.createRigidArea(new Dimension(0,100)));
-        foodCheckBoxContainer.add(rotiCheck); foodCheckBoxContainer.add(Box.createRigidArea(new Dimension(0,100)));
-        foodCheckBoxContainer.add(sirupCheck); foodCheckBoxContainer.add(Box.createRigidArea(new Dimension(0,100)));
-        foodCheckBoxContainer.add(tehCheck);foodCheckBoxContainer.add(Box.createRigidArea(new Dimension(0,100)));
-        foodCheckBoxContainer.add(miloCheck);
+        foodCheckBoxContainer.setBackground(Color.ORANGE);
+
+        foodCheckBoxContainer.add(nasiLemakCheck);foodCheckBoxContainer.add(Box.createRigidArea(new Dimension(0,90)));nasiLemakCheck.setOpaque(true);
+        nasiLemakCheck.setBackground(Color.ORANGE);
+        foodCheckBoxContainer.add(miGorengCheck); foodCheckBoxContainer.add(Box.createRigidArea(new Dimension(0,100)));miGorengCheck.setOpaque(true);
+        miGorengCheck.setBackground(Color.ORANGE);
+        foodCheckBoxContainer.add(rotiCheck); foodCheckBoxContainer.add(Box.createRigidArea(new Dimension(0,100)));rotiCheck.setOpaque(true);
+        rotiCheck.setBackground(Color.ORANGE);;
+        foodCheckBoxContainer.add(sirupCheck); foodCheckBoxContainer.add(Box.createRigidArea(new Dimension(0,100)));sirupCheck.setOpaque(true);
+        sirupCheck.setBackground(Color.ORANGE);
+        foodCheckBoxContainer.add(tehCheck);foodCheckBoxContainer.add(Box.createRigidArea(new Dimension(0,100)));tehCheck.setOpaque(true);
+        tehCheck.setBackground(Color.ORANGE);
+        foodCheckBoxContainer.add(miloCheck);miloCheck.setOpaque(true);
+        miloCheck.setBackground(Color.ORANGE);
 
         centerCenterPanel.add(foodCheckBoxContainer);
 
