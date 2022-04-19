@@ -32,9 +32,14 @@ public class GUI extends JFrame {
     JPanel bottomLeftPanel = new JPanel();
     JPanel bottomRightPanel = new JPanel();
     JButton applyBtn = new JButton("Apply");
-    JLabel discountText = new JLabel("Please enter the coupon code (*if applicable):");
+    JLabel discountTypeText =  new JLabel("Discount Type:");
+    JLabel discountAmountText =  new JLabel("Discount Amount:");
+    JLabel discountCodeText = new JLabel("Coupon code:");
+    ButtonGroup discountGroup = new ButtonGroup();
+    JRadioButton discount20;
+    JRadioButton discount10;
     JComboBox discountSelection;
-    JTextField discountInput = new JTextField(5);
+    JTextField discountInput = new JTextField(1);
     JButton checkoutBtn = new JButton("Checkout");
 
     // Cart panel
@@ -55,6 +60,8 @@ public class GUI extends JFrame {
         centerLeftPanel.setBackground(Color.blue);
         centerRightPanel.setBackground(Color.green);
         bottomPanel.setBackground(Color.PINK);
+        bottomLeftPanel.setBackground(Color.PINK);
+        bottomRightPanel.setBackground(Color.PINK);
         centerCenterPanel.setBackground(Color.ORANGE);
 
         this.add(welcomePanel,BorderLayout.PAGE_START);
@@ -135,12 +142,26 @@ public class GUI extends JFrame {
         bottomLeftPanel.setBackground(Color.PINK);
         bottomRightPanel.setBackground(Color.PINK);
 
-        bottomLeftPanel.add(discountText);
-        bottomLeftPanel.add(discountInput);
-
+        bottomLeftPanel.add(discountTypeText);
         String s1[] = { "Jalpaiguri", "Mumbai", "Noida", "Kolkata", "New Delhi" };
         discountSelection = new JComboBox(s1);
         bottomLeftPanel.add(discountSelection);
+
+        bottomLeftPanel.add(discountAmountText);
+        discount10 = new JRadioButton("10%");
+        discount20 = new JRadioButton("20%");
+        discountGroup.add(discount10); discountGroup.add(discount20);
+
+        discount10.setOpaque(true);
+        discount10.setBackground(Color.PINK);
+        discount20.setOpaque(true);
+        discount20.setBackground(Color.PINK);
+
+        bottomLeftPanel.add(discount10);
+        bottomLeftPanel.add(discount20);
+
+        bottomLeftPanel.add(discountCodeText);
+        bottomLeftPanel.add(discountInput);
 
         bottomLeftPanel.add(applyBtn);
 
