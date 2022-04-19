@@ -11,7 +11,7 @@ public class Item {
     private final String[] drinkName;
     private final Double[] foodPrice;
     private final Double[] drinkPrice;
-    private final Double[] discountAmt;
+    private final String[] discountAmt;
     private final String[] discountType;
 
     public Item(ItemBuilder itemBuilder) {
@@ -49,7 +49,7 @@ public class Item {
         return drinkPrice;
     }
 
-    public Double[] getDiscountAmt() { return discountAmt; }
+    public String[] getDiscountAmt() { return discountAmt; }
 
     public String [] getDiscountType() { return discountType; }
 

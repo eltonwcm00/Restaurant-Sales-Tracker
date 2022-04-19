@@ -51,6 +51,7 @@ public class GUI extends JFrame {
 
     Double sum = 0.0, priceUnit = 0.0;
     String itemLabel;
+    String[] discountType, discountAmount;
 
     GUI() {
 
@@ -83,6 +84,7 @@ public class GUI extends JFrame {
 
         new ItemBuilder().foodImg(itemObRead.getFoodImg()).foodName(itemObRead.getFoodName()).foodPrice(itemObRead.getFoodPrice()).buildItem();
         new ItemBuilder().drinkImg(itemObRead.getDrinkImg()).drinkName(itemObRead.getDrinkName()).drinkPrice(itemObRead.getDrinkPrice()).buildItem();
+        new ItemBuilder().discountAmount(itemObRead.getDiscountAmt()).discountType(itemObRead.getDiscountType()).buildItem();
 
         JLabel[] foodName = new JLabel[itemObRead.getFoodName().length];
         JLabel[] foodPricing = new JLabel[itemObRead.getFoodPrice().length];
@@ -151,13 +153,13 @@ public class GUI extends JFrame {
         bottomRightPanel.setBackground(Color.PINK);
 
         bottomLeftPanel.add(discountTypeText);
-        String s1[] = { "Jalpaiguri", "Mumbai", "Noida", "Kolkata", "New Delhi" };
-        discountSelection = new JComboBox(s1);
+        discountType = itemObRead.getDiscountType();
+        discountSelection = new JComboBox(discountType);
         bottomLeftPanel.add(discountSelection);
-
         bottomLeftPanel.add(discountAmountText);
-        discount10 = new JRadioButton("10%");
-        discount20 = new JRadioButton("20%");
+
+        discount10 = new JRadioButton(String.valueOf(itemObRead.getDiscountAmt()[0]));
+        discount20 = new JRadioButton(String.valueOf(itemObRead.getDiscountAmt()[1]));
         discountGroup.add(discount10); discountGroup.add(discount20);
 
         discount10.setOpaque(true);
