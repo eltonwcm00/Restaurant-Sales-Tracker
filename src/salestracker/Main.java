@@ -8,7 +8,6 @@ class Main {
 //
     public static void main(String[] args) {
         GUICartController gObj = new GUICartController();
-        GUICartController gc = new GUICartController();
 
         gObj.setDefaultCloseOperation(EXIT_ON_CLOSE);
         gObj.setSize(990,800);

@@ -40,7 +40,7 @@ public class GUI extends JFrame {
     JRadioButton discount20Disp;
     JRadioButton discount10Disp;
     JComboBox discountSelection;
-    JTextField discountInput = new JTextField(1);
+    JTextField discountInput = new JTextField(7);
     JButton checkoutBtn = new JButton("Checkout");
 
     // Cart panel
@@ -50,16 +50,15 @@ public class GUI extends JFrame {
     JLabel cartHeader = new JLabel("<html><u>Cart Log</u></html>");
     JLabel cartPrice = new JLabel();
 
-    Double sum = 0.0, priceUnit = 0.0, discountAmount = 0.0;
+    Double sum = 0.0, priceUnit = 0.0, discountAmount = 0.0, sumAfterDis = 0.0;
     String itemLabel;
+    String discountName;
     String[] discountType;
+    String discountCodeDesc;
     Boolean discountTypeValid = false, discountAmtValid = false,
-            discount10 = false, discount20 = false;
-
-    // Receipt
-    JLabel discount10JDisp = new JLabel(" ");
-    JLabel discount20JDisp = new JLabel(" ");
-    JLabel discountAfterPrice = new JLabel(" ");
+            discount10 = false, discount20 = false,
+            discount10Check = false, discount20Check = false,
+            discountApplied = false;
 
     GUI() {
 
@@ -92,7 +91,7 @@ public class GUI extends JFrame {
 
         new ItemBuilder().foodImg(itemObRead.getFoodImg()).foodName(itemObRead.getFoodName()).foodPrice(itemObRead.getFoodPrice()).buildItem();
         new ItemBuilder().drinkImg(itemObRead.getDrinkImg()).drinkName(itemObRead.getDrinkName()).drinkPrice(itemObRead.getDrinkPrice()).buildItem();
-        new ItemBuilder().discountAmount(itemObRead.getDiscountAmt()).discountType(itemObRead.getDiscountType()).buildItem();
+        new ItemBuilder().discountAmount(itemObRead.getDiscountAmt()).discountType(itemObRead.getDiscountType()).discountCode(itemObRead.getDiscountCode()).buildItem();
 
         JLabel[] foodName = new JLabel[itemObRead.getFoodName().length];
         JLabel[] foodPricing = new JLabel[itemObRead.getFoodPrice().length];
@@ -146,7 +145,7 @@ public class GUI extends JFrame {
         foodCheckBoxContainer.add(miGorengCheck); foodCheckBoxContainer.add(Box.createRigidArea(new Dimension(0,100)));miGorengCheck.setOpaque(true);
         miGorengCheck.setBackground(Color.ORANGE);
         foodCheckBoxContainer.add(rotiCheck); foodCheckBoxContainer.add(Box.createRigidArea(new Dimension(0,100)));rotiCheck.setOpaque(true);
-        rotiCheck.setBackground(Color.ORANGE);;
+        rotiCheck.setBackground(Color.ORANGE);
         foodCheckBoxContainer.add(sirupCheck); foodCheckBoxContainer.add(Box.createRigidArea(new Dimension(0,100)));sirupCheck.setOpaque(true);
         sirupCheck.setBackground(Color.ORANGE);
         foodCheckBoxContainer.add(tehCheck);foodCheckBoxContainer.add(Box.createRigidArea(new Dimension(0,100)));tehCheck.setOpaque(true);
@@ -185,15 +184,13 @@ public class GUI extends JFrame {
 
         bottomLeftPanel.add(discountCodeText);
         bottomLeftPanel.add(discountInput);
-        discountInput.setEditable(false);
+        //discountInput.setEditable(false);
 
         bottomLeftPanel.add(applyBtn);
 
         bottomRightPanel.add(checkoutBtn);
-        bottomRightPanel.add(discount10JDisp);
-        bottomRightPanel.add(discount20JDisp);
 
-        discountInput.setBorder(BorderFactory.createEmptyBorder(0, 0, 0,100));
+       // discountInput.setBorder(BorderFactory.createEmptyBorder(0, 0, 0,0));
 
         bottomPanel.add(bottomLeftPanel, BorderLayout.WEST);
         bottomPanel.add(bottomRightPanel, BorderLayout.EAST);

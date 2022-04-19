@@ -6,70 +6,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.Arrays;
+import java.util.Objects;
 
 public class GUICartController extends GUI implements ActionListener, ItemListener {
 
     Item itemObRead = new ItemBuilder().buildItem();
-
-    GUICartController() {
-
-        nasiLemakCheck.addActionListener(this); miGorengCheck.addActionListener(this);rotiCheck.addActionListener(this);
-        sirupCheck.addActionListener(this); tehCheck.addActionListener(this); miloCheck.addActionListener(this);
-        discountSelection.addItemListener(this);
-
-          discount10Disp.addActionListener(new ActionListener() {
-              @Override
-              public void actionPerformed(ActionEvent event) {
-
-                  JRadioButton button = (JRadioButton) event.getSource();
-
-                  if(button.isSelected()) {
-                      if(button ==  discount10Disp) {
-                          discountAmount = itemObRead.getDiscountAmt()[0];
-                          discount10JDisp.setText(String.valueOf(discountAmount));
-                          //System.out.println(discountAmount);
-                          discount10 = true;
-                          discount20 = false;
-                      }
-                  }
-              }
-          });
-
-          discount20Disp.addActionListener(new ActionListener() {
-               @Override
-               public void actionPerformed(ActionEvent event) {
-
-                   JRadioButton button = (JRadioButton) event.getSource();
-
-                   if(button.isSelected()) {
-                       if(button ==  discount20Disp) {
-                           discountAmount = itemObRead.getDiscountAmt()[1];
-                           discount20JDisp.setText(String.valueOf(discountAmount));
-                           //System.out.println(discountAmount);
-                           discount10 = false;
-                           discount20 = true;
-                       }
-                   }
-               }
-          });
-
-          applyBtn.addActionListener(new ActionListener() {
-              @Override
-              public void actionPerformed(ActionEvent e) {
-                  if(e.getSource() == applyBtn) {
-
-                      if(discount10&&!discount20) {
-                          discountAmount = itemObRead.getDiscountAmt()[0];
-                      }
-                      else if(!discount10&&discount20) {
-                          discountAmount = itemObRead.getDiscountAmt()[1];
-                      }
-
-                      System.out.println(discountAmount);
-                  }
-              }
-          });
-    }
 
     @Override
     public void actionPerformed(ActionEvent event) {
@@ -154,16 +96,6 @@ public class GUICartController extends GUI implements ActionListener, ItemListen
         centerRightPanel.add(cartPriceContainer, BorderLayout.SOUTH);
         cartPriceContainer.setBackground(Color.CYAN);
         cartPriceContainer.add(cartPrice);
-
-        if(event.getSource() == discount20Disp) {
-            JRadioButton button = (JRadioButton) event.getSource();
-
-                    if(button.isSelected()) {
-                        if(button ==  discount20Disp) {
-                            System.out.print("cc");
-                        }
-                    }
-        }
     }
 
     @Override
@@ -173,13 +105,13 @@ public class GUICartController extends GUI implements ActionListener, ItemListen
 
             if(discountSelection.getSelectedItem()!= "Food & Drink") {
                 JOptionPane.showMessageDialog(null,
-                                        "Discount option is unavailable for now",
-                                            "Unavailable", JOptionPane.ERROR_MESSAGE);
+                        "Discount option is unavailable for now",
+                        "Unavailable", JOptionPane.ERROR_MESSAGE);
             }
             else {
                 JOptionPane.showMessageDialog( null,
-                                        discountSelection.getSelectedItem() +
-                                                " type voucher is selected !");
+                        discountSelection.getSelectedItem() +
+                                " type voucher is selected !");
 
                 System.out.println("Radio Button is unlocked");
 
@@ -192,29 +124,142 @@ public class GUICartController extends GUI implements ActionListener, ItemListen
             discountTypeValid = false;
         }
 
-//        if (discountTypeValid) {
-//
-//            if (e.getSource() == discount10Disp) {
-//                discountAmtValid = true;
-//
-//                System.out.print("f");
-//
-//                if(discount10Disp.isSelected()) {
-//                    discountAmount = itemObRead.getDiscountAmt()[0];
-//                }
-//                else if(discount20Disp.isSelected()) {
-//                    discountAmount = itemObRead.getDiscountAmt()[1];
-//                }
-//                System.out.println(discountAmount);
-//            }
-//            else {
-//                System.out.print("fb");
-//                discountAmtValid = false;
-//            }
-//        }
-
         if(discountAmtValid) {
             discountInput.setEditable(true);
         }
+    }
+
+    GUICartController() {
+
+        nasiLemakCheck.addActionListener(this); miGorengCheck.addActionListener(this);rotiCheck.addActionListener(this);
+        sirupCheck.addActionListener(this); tehCheck.addActionListener(this); miloCheck.addActionListener(this);
+        discountSelection.addItemListener(this);
+
+          discount10Disp.addActionListener(new ActionListener() {
+              @Override
+              public void actionPerformed(ActionEvent event) {
+
+                  JRadioButton button = (JRadioButton) event.getSource();
+
+                  if(button.isSelected()) {
+                      if(button ==  discount10Disp) {
+                          discountAmount = itemObRead.getDiscountAmt()[0];
+                          discount10 = true;
+                          discount20 = false;
+                      }
+                  }
+              }
+          });
+
+          discount20Disp.addActionListener(new ActionListener() {
+               @Override
+               public void actionPerformed(ActionEvent event) {
+
+                   JRadioButton button = (JRadioButton) event.getSource();
+
+                   if(button.isSelected()) {
+                       if(button ==  discount20Disp) {
+                           discountAmount = itemObRead.getDiscountAmt()[1];
+                           discount10 = false;
+                           discount20 = true;
+                       }
+                   }
+               }
+          });
+
+          applyBtn.addActionListener(new ActionListener() {
+              @Override
+              public void actionPerformed(ActionEvent e) {
+                  if(e.getSource() == applyBtn) {
+
+                     if(Objects.equals(discountInput.getText(), itemObRead.getDiscountCode()[0]) ||
+                             Objects.equals(discountInput.getText(), itemObRead.getDiscountCode()[1])) {
+
+                         if(Objects.equals(discountInput.getText(), itemObRead.getDiscountCode()[0])
+                                 && discount10 && !discount20) {
+                             discountAmount = itemObRead.getDiscountAmt()[0];
+
+                             System.out.println(discountAmount);
+
+                             discount10Check = true;
+                             discount20Check = false;
+
+                             discountName = itemObRead.getDiscountCode()[0];
+
+                             JOptionPane.showMessageDialog(null,
+                                     "Discount code "+ discountName + " has been applied", "Valid", JOptionPane.INFORMATION_MESSAGE);
+
+                             discountApplied = true;
+                         }
+                         else if(Objects.equals(discountInput.getText(), itemObRead.getDiscountCode()[1])
+                                 && !discount10 && discount20) {
+                             discountAmount = itemObRead.getDiscountAmt()[1];
+
+                             System.out.println(discountAmount); ////////////////
+
+                             discount10Check = false;
+                             discount20Check = true;
+
+                             discountName = itemObRead.getDiscountCode()[1];
+
+                             JOptionPane.showMessageDialog(null,
+                                     "Discount code "+ discountName + " has been applied", "Valid", JOptionPane.INFORMATION_MESSAGE);
+
+                             discountApplied = true;
+                         }
+                         else {
+                             JOptionPane.showMessageDialog(null,
+                                     "Discount type is invalid, please try again",
+                                     "Invalid", JOptionPane.ERROR_MESSAGE);
+                         }
+                        // System.out.println(discountAmount);
+                     }
+                     else {
+                         JOptionPane.showMessageDialog(null,
+                                 "Discount code is invalid, please try again",
+                                 "Invalid", JOptionPane.ERROR_MESSAGE);
+                     }
+                  }
+              }
+          });
+
+          checkoutBtn.addActionListener(new ActionListener() {
+              @Override
+              public void actionPerformed(ActionEvent e) {
+
+                  if(e.getSource() == checkoutBtn) {
+
+                      if(discountApplied) {
+
+                          if(discount10Check && !discount20Check) {
+                              sumAfterDis = sum * itemObRead.getDiscountAmt()[0];
+                              discountCodeDesc = itemObRead.getDiscountAmtDesc()[0];
+                          }
+                          else if(!discount10Check && discount20Check) {
+                              sumAfterDis = sum * itemObRead.getDiscountAmt()[1];
+                              discountCodeDesc = itemObRead.getDiscountAmtDesc()[1];
+                          }
+
+                        System.out.println(sum); //8.8
+                        System.out.println(discountCodeDesc); // 10%
+                        System.out.println(sumAfterDis); // 7.92
+
+                      }
+                      else {
+                          sumAfterDis = sum;
+                          discountCodeDesc = "No discount code is applied";
+                      }
+
+                      JOptionPane.showMessageDialog(null,
+                              "=================================\n" +
+                                      "Total Price : RM " + sum + "\n" +
+                                      "Discount Applied : " + discountCodeDesc + "\n" +
+                                      "Payable Price After Discount : RM " + sumAfterDis + "\n" +
+                                      "==================================",
+                              "Your Receipt", JOptionPane.INFORMATION_MESSAGE);
+
+                  }
+              }
+          });
     }
 }

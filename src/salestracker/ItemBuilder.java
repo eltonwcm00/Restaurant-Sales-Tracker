@@ -18,8 +18,10 @@ public class ItemBuilder implements ItemPlan {
         Double[] foodPrice = new Double[] {5.50, 3.30, 4.70, 9.0};
         String[] drinkName = new String[] {"Sirup Bandung", "Teh Ais", "Kopi Cham"};
         Double[] drinkPrice= new Double[] {5.20, 2.10, 1.90};
-        Double[] discountAmt = new Double[] {0.1, 0.2};
+        Double[] discountAmt = new Double[] {0.9, 0.8};
+        String[] discountAmtDesc = new String[] {"10%", "20%"};
         String[] discountType =  new String[] {"Food & Drink", "Food", "Drink"};
+        String[] discountCode = new String[] {"OFF10", "OFF20"};
 
         public ItemBuilder foodImg (ImageIcon[] foodImgArr) {
             this.foodImg = foodImgArr;
@@ -58,6 +60,16 @@ public class ItemBuilder implements ItemPlan {
 
         public ItemBuilder discountType (String[] discountTypeArr) {
             this.discountType = discountTypeArr;
+            return this;
+        }
+
+        public ItemBuilder discountCode (String[] discountCodeArr) {
+            this.discountCode = discountCodeArr;
+            return this;
+        }
+
+        public ItemBuilder discountCodeDesc (String[] discountCodeDescArr) {
+            this.discountAmtDesc = discountCodeDescArr;
             return this;
         }
 

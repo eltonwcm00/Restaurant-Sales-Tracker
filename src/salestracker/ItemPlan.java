@@ -11,5 +11,7 @@ public interface ItemPlan {
     public ItemPlan drinkPrice (Double[] drinkPriceArr);
     public ItemPlan discountAmount (Double[] discountAmountArr);
     public ItemPlan discountType (String[] discountTypeArr);
+    public ItemPlan discountCode (String[] discountCodeArr);
+    public ItemPlan discountCodeDesc (String[] discountCodeDescArr);
     public Item buildItem();
 }
